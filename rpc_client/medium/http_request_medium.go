@@ -24,7 +24,7 @@ func (self HttpRequestMedium) Send(request *rpc_client.Request) (*rpc_client.Res
 	if err != nil {
 		return nil, err
 	}
-	log.Println(string(request_json))
+	log.Println("[HTTP Request]", string(request_json))
 
 	http_resp, err := http.Post(self.url, "application/json", bytes.NewReader(request_json))
 	if err != nil {

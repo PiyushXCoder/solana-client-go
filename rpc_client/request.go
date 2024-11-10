@@ -11,29 +11,6 @@ type Request struct {
 	params  []any
 }
 
-func NewRequest(method string) *Request {
-	req := new(Request)
-
-	req.jsonrpc = "2.0"
-
-	// TODO: Check if nil if fesible!?
-	req.id = 1
-	req.method = &method
-	req.params = nil
-
-	return req
-}
-
-func (self *Request) SetMethod(method string) *Request {
-	self.method = &method
-	return self
-}
-
-func (self *Request) SetParam(params []any) *Request {
-	self.params = params
-	return self
-}
-
 func (self *Request) MarshalJSON() ([]byte, error) {
 	return json.Marshal(map[string]any{
 		"jsonrpc": self.jsonrpc,
@@ -41,4 +18,36 @@ func (self *Request) MarshalJSON() ([]byte, error) {
 		"method":  self.method,
 		"params":  self.params,
 	})
+}
+
+type RequestBuilder struct {
+	request *Request
+}
+
+func NewRequestBuilder() *RequestBuilder {
+	reqBuilder := new(RequestBuilder)
+	reqBuilder.request = new(Request)
+
+	return reqBuilder
+}
+
+func (self *RequestBuilder) Id(id uint) *RequestBuilder {
+	self.request.id = id
+	return self
+}
+
+func (self *RequestBuilder) Method(method string) *RequestBuilder {
+	self.request.method = &method
+	return self
+}
+
+func (self *RequestBuilder) Params(params []any) *RequestBuilder {
+	self.request.params = params
+	return self
+}
+
+func (self RequestBuilder) Build() *Request {
+	self.request.jsonrpc = "2.0"
+
+	return self.request
 }
