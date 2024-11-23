@@ -1,12 +1,23 @@
 package rpc_client
 
+import (
+	"encoding/json"
+)
+
 type Response struct {
-	Body string
+	Jsonrpc string          `json:"jsonrpc"`
+	Id      uint            `json:"id"`
+	Result  json.RawMessage `json:"result"`
 }
 
 // TODO: Make builder
-func NewResponse(body string) *Response {
+func NewResponse(response_body []byte) (*Response, error) {
 	resp := new(Response)
-	resp.Body = body
-	return resp
+
+	err := json.Unmarshal(response_body, resp)
+	if err != nil {
+		return nil, err
+	}
+
+	return resp, nil
 }

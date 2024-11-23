@@ -37,7 +37,7 @@ func (self HttpRequestMedium) Send(request *rpc_client.Request) (*rpc_client.Res
 	}
 
 	// TODO: Use builder
-	resp := rpc_client.NewResponse(string(response_body))
+	resp, err := rpc_client.NewResponse(response_body)
 
-	return resp, nil
+	return resp, err
 }
