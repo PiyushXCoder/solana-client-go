@@ -5,9 +5,9 @@ import (
 )
 
 type Response struct {
-	Jsonrpc string          `json:"jsonrpc"`
-	Id      uint            `json:"id"`
-	Result  json.RawMessage `json:"result"`
+	Jsonrpc   string          `json:"jsonrpc"`
+	Id        uint            `json:"id"`
+	RawResult json.RawMessage `json:"result"`
 }
 
 // TODO: Make builder
@@ -20,4 +20,8 @@ func NewResponse(response_body []byte) (*Response, error) {
 	}
 
 	return resp, nil
+}
+
+func (self Response) Result() {
+
 }
