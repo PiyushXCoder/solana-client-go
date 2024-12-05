@@ -12,7 +12,7 @@ It is an RPC based solana client. It is still experimental and is in very early 
 
 Absolutly Yes! 
 
-You can try following things to get started ad the project is intended to be simple for now.
-I might have taken some bad design designs, so feel free to suggest improvements.
+You can try following things to get started and the project is intended to be simple for now.
+I might have taken some bad design decisions, so feel free to suggest improvements.
 
-Try by checking how I make request in `./sample_request.go`
+Try it by checking how I make request in `./sample_request.go`
